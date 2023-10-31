@@ -6,7 +6,7 @@
 
 :root {
     --pixel-count : 16;
-    --container-size: 500px;
+    --container-size: 320px;
     --pen-color : hsl(0, 0%, 0%);
 }
 
@@ -15,7 +15,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    height: 100vw;
+    width: 100vw;
+    flex-direction: column;
 }
 
 .container {
@@ -27,7 +28,7 @@ body {
     user-select: none;
     border: 10px solid rgb(0, 18, 0);
     box-sizing: content-box;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .container > .pixel {
@@ -35,6 +36,7 @@ body {
     height: calc(var(--container-size)/var(--pixel-count));
     -webkit-user-select: none;
     user-select: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .container > .pixel.draw {
