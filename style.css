@@ -6,7 +6,7 @@
 
 :root {
     --pixel-count : 16;
-    --container-width : 300px;
+    --container-size: 500px;
     --pen-color : hsl(0, 0%, 0%);
 }
 
@@ -21,16 +21,22 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    width: 320px;
-    height: 320px;
+    width: var(--container-size);
+    height: var(--container-size);
+    -webkit-user-select: none;
+    user-select: none;
+    border: 10px solid rgb(0, 18, 0);
+    box-sizing: content-box;
+    border-radius: 2px;
 }
 
 .container > .pixel {
-    width: calc(320px/var(--pixel-count));
-    height: calc(320px/var(--pixel-count));
-    border: 1px solid black;
+    width: calc(var(--container-size)/var(--pixel-count));
+    height: calc(var(--container-size)/var(--pixel-count));
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.container > .pixel:hover {
+.container > .pixel.draw {
     background-color: var(--pen-color);
 }
