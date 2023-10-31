@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pixel-count : 16;
+    --container-width : 300px;
+    --pen-color : hsl(0, 0%, 0%);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100vw;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    height: 320px;
+}
+
+.container > .pixel {
+    width: calc(320px/var(--pixel-count));
+    height: calc(320px/var(--pixel-count));
+    border: 1px solid black;
+}
+
+.container > .pixel:hover {
+    background-color: var(--pen-color);
+}
