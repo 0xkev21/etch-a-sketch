@@ -7,17 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Sketch Container -->
     <h1>Etch A Sketch</h1>
     <section class="main">
+        <!-- Sketch Container -->
         <div class="container"></div>
-        
-        <div class="controls">
 
+        <!-- Controls Container -->
+        <div class="controls">
             <label for="col-count"> Pixels <span class="pixels">16</span> × <span class="pixels">16</span>
                 <input type="range" id="col-count" name="col-count" step="1" min="6" value="16" max="100">
             </label>
-            
+            <label for="color">color
+                <input type="color" id="color" name="color" value="#000000">
+            </label>
+            <button id="eraser" type="button">Eraser</button>
+            <button id="clear" type="button">Clear</button>
         </div>
     </section>
     

@@ -1,6 +1,10 @@
 const container = document.querySelector('.container');
 const column = document.querySelector('#col-count'); // input for column count
-const color = 'black';
+const colorInput = document.querySelector('#color');
+const eraser = document.querySelector('#eraser');
+const clear = document.querySelector('#clear');
+
+let eraserMode = false;
 
 // function to create pixels inside the container to make sketchpad
 function createSketch() {
@@ -19,7 +23,7 @@ function createSketch() {
         pixel.classList.add('pixel');
         
         // reset the width of each pixel
-        pixel.style.setProperty('--pixel-count', colCount);
+        container.style.setProperty('--pixel-count', colCount);
 
         fragment.appendChild(pixel);
     }
@@ -27,11 +31,18 @@ function createSketch() {
 }
 createSketch();
 
+
 // initiate painting with a boolean value
 let painting = false;
 function draw(e) {
     if (!painting) return;
-    e.target.classList.add('draw');
+    if (e.target.classList.contains('pixel')) {
+        if(eraserMode) {
+            e.target.style.backgroundColor = 'transparent';
+            return;
+        }
+        e.target.style.backgroundColor = colorInput.value;
+    }
 }
 // start the painting on mousedown
 document.body.addEventListener('mousedown', function(e) {
@@ -50,5 +61,24 @@ column.addEventListener('input', () => {
     const displayPixels = document.querySelectorAll('.pixels');
     displayPixels.forEach(p => {
         p.textContent = column.value;
+    })
+})
+
+// Eraser Mode
+eraser.addEventListener('click', () => {
+    if (!eraserMode) {
+        eraserMode = true;
+        eraser.classList.add('active');
+    } else {
+        eraserMode = false;
+        eraser.classList.remove('active');
+    }
+})
+
+// clear feature
+clear.addEventListener('click', () => {
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach(pixel => {
+        pixel.style.backgroundColor = 'transparent';
     })
 })

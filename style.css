@@ -39,6 +39,6 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.container > .pixel.draw {
-    background-color: var(--pen-color);
+.active {
+    background-color: lightgreen;
 }
