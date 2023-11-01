@@ -3,8 +3,10 @@ const column = document.querySelector('#col-count'); // input for column count
 const colorInput = document.querySelector('#color');
 const eraser = document.querySelector('#eraser');
 const clear = document.querySelector('#clear');
+const rainbow = document.querySelector('#rainbow');
 
 let eraserMode = false;
+let rainbowMode = false;
 
 // function to create pixels inside the container to make sketchpad
 function createSketch() {
@@ -21,6 +23,8 @@ function createSketch() {
     for (let i = 0; i < pixelCount; i++) {
         const pixel = document.createElement('div');
         pixel.classList.add('pixel');
+        pixel.addEventListener('mouseenter', draw);
+        pixel.style.userSelect = 'none';
         
         // reset the width of each pixel
         container.style.setProperty('--pixel-count', colCount);
@@ -41,6 +45,10 @@ function draw(e) {
             e.target.style.backgroundColor = 'transparent';
             return;
         }
+        if(rainbowMode) {
+            e.target.style.backgroundColor = getRandomColor();
+            return;
+        }
         e.target.style.backgroundColor = colorInput.value;
     }
 }
@@ -49,8 +57,7 @@ document.body.addEventListener('mousedown', function(e) {
     painting = true;
     draw(e);
 });
-// continue the drawing during mousemove
-container.addEventListener('mousemove', draw);
+
 // end the painting on mouseup
 document.body.addEventListener('mouseup', () => {painting = false;});
 
@@ -75,10 +82,31 @@ eraser.addEventListener('click', () => {
     }
 })
 
-// clear feature
+// change back to color mode when user choose color
+colorInput.addEventListener('change', () => {
+    eraserMode = false;
+    eraser.classList.remove('active');
+})
+
+// Clear Feature
 clear.addEventListener('click', () => {
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach(pixel => {
         pixel.style.backgroundColor = 'transparent';
     })
+})
+
+// get random color for rainbow mode
+const getRandomNumber = () => Math.floor(Math.random() * 256);
+const getRandomColor = () => `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
+
+// Rainbow Mode
+rainbow.addEventListener('click', () => {
+    if (!rainbowMode) {
+        rainbowMode = true;
+        rainbow.classList.add('active');
+    } else {
+        rainbowMode = false;
+        rainbow.classList.remove('active');
+    }
 })
