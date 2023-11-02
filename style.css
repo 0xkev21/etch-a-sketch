@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Pixelify+Sans&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,17 +8,71 @@
 
 :root {
     --pixel-count : 16;
-    --container-size: 320px;
+    --container-size: 300px;
     --pen-color : hsl(0, 0%, 0%);
+    --primary-color: #E0E0E0;
+    --secondary-color-off: #717171;
+    --secondary-color-on: #3C96FF;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
+    font-family: 'Chakra Petch', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    background: url('backgrounds/mobile-bg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: 'Pixelify Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(30px, 10vw, 60px);
+    text-align: center;
+    position: relative;
+    top: -50px;
+    letter-spacing: 0.2ch;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pixels-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+label[for='col-count'] {
+    display: flex;
+    width: 100%;
+}
+
+.pixel-value {
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+#col-count {
+    flex-grow: 1;
+    display: inline-block;
+    cursor: ew-resize;
+    accent-color: var(--secondary-color-on);
 }
 
 .container {
@@ -26,7 +82,7 @@ body {
     height: var(--container-size);
     -webkit-user-select: none;
     user-select: none;
-    border: 10px solid rgb(0, 18, 0);
+    border: 5px solid var(--secondary-color-off);
     box-sizing: content-box;
     border-radius: 5px;
 }
@@ -36,6 +92,130 @@ body {
     height: calc(var(--container-size)/var(--pixel-count));
 }
 
-.active {
-    background-color: lightgreen;
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 300px;
+    gap: 20px;
+}
+
+label[for='color'] {
+    display: flex;
+    width: 140px;
+    background-color: var(--primary-color);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#color {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 30px;
+    height: 34px;
+    border: none;
+    background: none;
+}
+
+#color::-webkit-color-swatch {
+    border-radius: 50%;
+    position: relative;
+    bottom: 1.3px;
+}
+
+#color::-moz-color-swatch {
+    border-radius: 50%;
+    position: relative;
+    bottom: 1.3px;
+}
+
+.controls > * {
+    display: flex;
+    width: 140px;
+    height: 50px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.controls > *:hover {
+    background-color: rgb(205, 204, 204);
+}
+
+.rectangle {
+    position: absolute;
+    background-color: var(--secondary-color-off);
+    height: 5px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+button i {
+    font-size: 20px;
+}
+
+button:last-child {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.active > .rectangle {
+    background-color: var(--secondary-color-on);
+}
+.active i {
+    color: var(--secondary-color-on);
+}
+
+@media only screen and (min-width: 1000px) {
+    body {
+        background: url('backgrounds/desktop-bg.svg');
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    :root {
+        --container-size: 400px;
+    }
+    .app {
+        flex-direction: row;
+        gap: clamp(80px, 10vw, 200px);
+        justify-content: center;
+        align-items: center;
+    }
+    .pixels-container {
+        width: 400px;
+    }
+    .controls {
+        flex-flow: column nowrap;
+        height: 400px;
+        width: 300px;
+        gap: 30px;
+    }
+    .controls > *, label[for='color'] {
+        width: 100%;
+    }
+    button:last-child {
+        flex-grow: 0;
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
 }

@@ -5,6 +5,7 @@ const eraser = document.querySelector('#eraser');
 const clear = document.querySelector('#clear');
 const rainbow = document.querySelector('#rainbow');
 const opacity = document.querySelector('#opacity');
+const modes = document.querySelectorAll('.mode');
 
 let eraserMode = false;
 let rainbowMode = false;
@@ -83,6 +84,10 @@ eraser.addEventListener('click', () => {
     if (!eraserMode) {
         eraserMode = true;
         eraser.classList.add('active');
+        rainbowMode = false;
+        rainbow.classList.remove('active');
+        opacityMode = false;
+        opacity.classList.remove('active');
     } else {
         eraserMode = false;
         eraser.classList.remove('active');
@@ -93,6 +98,8 @@ eraser.addEventListener('click', () => {
 colorInput.addEventListener('change', () => {
     eraserMode = false;
     eraser.classList.remove('active');
+    rainbowMode = false;
+    rainbow.classList.remove('active');
 })
 
 // Clear Feature
@@ -112,6 +119,8 @@ rainbow.addEventListener('click', () => {
     if (!rainbowMode) {
         rainbowMode = true;
         rainbow.classList.add('active');
+        eraserMode = false;
+        eraser.classList.remove('active');
     } else {
         rainbowMode = false;
         rainbow.classList.remove('active');
@@ -123,6 +132,8 @@ opacity.addEventListener('click', () => {
     if (!opacityMode) {
         opacityMode = true;
         opacity.classList.add('active');
+        eraserMode = false;
+        eraser.classList.remove('active');
     } else {
         opacityMode = false;
         opacity.classList.remove('active');
