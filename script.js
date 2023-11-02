@@ -4,9 +4,11 @@ const colorInput = document.querySelector('#color');
 const eraser = document.querySelector('#eraser');
 const clear = document.querySelector('#clear');
 const rainbow = document.querySelector('#rainbow');
+const opacity = document.querySelector('#opacity');
 
 let eraserMode = false;
 let rainbowMode = false;
+let opacityMode = false;
 
 // function to create pixels inside the container to make sketchpad
 function createSketch() {
@@ -44,6 +46,11 @@ function draw(e) {
         if(eraserMode) {
             e.target.style.backgroundColor = 'transparent';
             return;
+        }
+        if(opacityMode) {
+            let currentOpacity = parseFloat(e.target.style.opacity) || 0;
+            currentOpacity = Math.min(currentOpacity + 0.2);
+            e.target.style.opacity = currentOpacity;
         }
         if(rainbowMode) {
             e.target.style.backgroundColor = getRandomColor();
@@ -108,5 +115,16 @@ rainbow.addEventListener('click', () => {
     } else {
         rainbowMode = false;
         rainbow.classList.remove('active');
+    }
+})
+
+// Opacity Mode
+opacity.addEventListener('click', () => {
+    if (!opacityMode) {
+        opacityMode = true;
+        opacity.classList.add('active');
+    } else {
+        opacityMode = false;
+        opacity.classList.remove('active');
     }
 })
