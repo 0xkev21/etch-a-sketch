@@ -181,10 +181,6 @@ footer {
     color: var(--secondary-color-off);
 }
 
-footer a {
-    color: var(--secondary-color-on);
-}
-
 .active > .rectangle {
     background-color: var(--secondary-color-on);
 }
